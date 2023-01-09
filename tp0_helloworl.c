@@ -1,25 +1,25 @@
- 
-  File   newmain.c
-  Author 
- 
-  Created on 6 janvier 2023, 0952
- 
+/*
+ * File:   newmain2.c
+ *
+ * Created on 6 janvier 2023, 09:52
+ */
 
-#include stdio.h
-#include stdlib.h
-#include xc.h
+// AP:No #include "configbits.h" ?
+#include <stdio.h>  // AP:No use here
+#include <stdlib.h> // AP:No use here
+#include <xc.h>
 #define _XTAL_FREQ 8000000  define the frequency of the crystal oscillator
 
-int main(void) {
-     Initialize the device
-    OSCCON = 0xFC;
-    ANSELB = 0x00;
-    ANSELD = 0x00;
-    TRISD = 0x00;
-    TRISB = 0x00;
+int main(void) { // AP:main does not need to return anything on MCUs : best form is void main(void){}
+    // Initialize the device
+    OSCCON = 0xFC; // AP:Description ?
+    ANSELB = 0x00; // AP:Description ? Any use here ?
+    ANSELD = 0x00; // AP:Description ? Any use here ?
+    TRISD = 0x00;  // AP:Description ? I know D1-D4 are TRISD<0:3>, why set TRISD<4:7> aswell ?
+    TRISB = 0x00;  // AP:Description ? I know D5-D8 are TRISB<0:3>, why set TRISB<4:7> aswell ?
 
     while(1) {
-         Toggle the first group of LEDs
+        // Toggle the first group of LEDs
         LATBbits.LATB3 = 1;
         LATBbits.LATB2 = 1;
         LATBbits.LATB1 = 1;
@@ -29,10 +29,10 @@ int main(void) {
         LATDbits.LATD1 = 0;
         LATDbits.LATD0 = 0;
 
-         Delay
-        __delay_ms(1000);
+        // Delay
+        __delay_ms(1000); // AP:OK. Should be 500 ms for a 1s period
 
-         Toggle the second group of LEDs
+        // Toggle the second group of LEDs
         LATBbits.LATB3 = 0;
         LATBbits.LATB2 = 0;
         LATBbits.LATB1 = 0;
@@ -42,9 +42,9 @@ int main(void) {
         LATDbits.LATD1 = 1;
         LATDbits.LATD0 = 1;
 
-         Delay
-        __delay_ms(1000);
+        // Delay
+        __delay_ms(1000); // AP:OK. Should be 500 ms for a 1s period
     }
 
-    return 0;
+    return 0; // AP:main does not need to return anything on MCUs : best form is void main(void){}
 }
